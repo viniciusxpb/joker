@@ -1,14 +1,17 @@
 <div class="container">
-    <div class="main__wrapper">
-  <h1>Gerador de Piadas</h1>
-
-  <div class="box__wrapper">
-    <div class="box__joke">
-      <p class="piada" *ngIf="piada">{{ piada }}</p>
+  <div class="card">
+    <div class="card__header">
+      Gerador de Piadas
     </div>
 
-    <button (click)="gerarPiada()">Gerar Piada</button>
+
+    <div class="box__wrapper">
+      <div class="box__joke">
+        <p class="piada" *ngIf="piada">{{ piada }}</p>
+      </div>
+
+      <button (click)="gerarPiada()">Gerar Piada</button>
+    </div>
   </div>
-    </div>
 
 </div>

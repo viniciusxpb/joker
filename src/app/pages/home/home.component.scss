@@ -4,19 +4,26 @@
   width: 100%;
   padding: 0 16px;
 
-  .main__wrapper {
+  .card__header{
+    width: 100%;
+    padding: 16px;
+    border-bottom: 1px solid lightgray;
+  }
+
+  .card {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 80px;
     width: 100%;
     max-width: 800px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
   }
 
   .box__wrapper {
     background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
     padding: 32px;
     width: 100%;
     display: flex;
