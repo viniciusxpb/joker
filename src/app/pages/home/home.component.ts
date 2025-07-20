@@ -7,15 +7,42 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   piada: string = '';
+  categoriaSelecionada: string | null = null;
+
+  ngOnInit() {
+    this.categoriaSelecionada = '';
+  }
+
+  trocarCategoria() {
+    this.piada = '';
+  }
 
   gerarPiada() {
-    const piadas = [
-      'Por que o JavaScript foi ao médico? Porque estava com muitos callbacks!',
-      'Qual o cúmulo do programador? Ficar triste porque o crush deu um null nele.',
-      'Como o dev chama o filho? Bugson.',
-      'Por que o Angular não se perde? Porque sempre tem um router.'
-    ];
-    const index = Math.floor(Math.random() * piadas.length);
-    this.piada = piadas[index];
+    const piadas: { [key: string]: string[] } = {
+      aleatoria: [
+        'Por que o JavaScript foi ao médico? Porque estava com muitos callbacks!',
+        'Como o dev chama o filho? Bugson.',
+        'Por que o Angular não se perde? Porque sempre tem um router.',
+        'O que o HTML disse para o CSS? Você me estiliza!',
+        'Por que o programador levou um café pro computador? Porque ele estava com Java.'
+      ],
+      top10: [
+        'Criei um app que conta piadas… mas ninguém baixa. Deve ser porque é só piada interna.',
+        'Usei tanto `!important` que minha esposa foi embora e não voltou mais.',
+        'Coloquei minha fé no código… deu `undefined`.',
+        'Meu código funciona… até alguém usar.',
+        'Pedi conselhos pro Stack Overflow… agora tô na terapia.'
+      ],
+      texto: [
+        'Um programador entra num bar. Pede 1 cerveja. Pede 0 cervejas. Pede 9999999 cervejas. Pede uma cobra. Pede -1 cervejas. Pede uma torradeira.',
+        'Na vida real, o amor é async e o retorno é sempre uma Promise que nunca resolve.',
+        'No final, tudo é apenas um `console.log()` no vazio esperando atenção.'
+      ]
+    };
+
+    const categoria = this.categoriaSelecionada || 'aleatoria';
+    const lista = piadas[categoria] || piadas['aleatoria'];
+    const index = Math.floor(Math.random() * lista.length);
+    this.piada = lista[index];
   }
 }
