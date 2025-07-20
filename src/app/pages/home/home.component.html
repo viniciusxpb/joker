@@ -4,17 +4,24 @@
       <span>Gerador de Piadas</span>
 
       <div class="card__inputWrapper">
-        <input class="card__textInput">
-        <select [(ngModel)]="categoriaSelecionada" (change)="trocarCategoria()" class="select-categoria">
+        <input
+          class="card__textInput"
+          *ngIf="categoriaSelecionada === 'texto'"
+          [(ngModel)]="textoInput"
+          placeholder="Digite o texto aqui"
+        />
+
+        <select
+          [(ngModel)]="categoriaSelecionada"
+          (change)="trocarCategoria()"
+          class="select-categoria"
+        >
           <option value="" disabled hidden>Selecione uma categoria</option>
           <option value="aleatoria">Aleatória</option>
           <option value="top10">Top 50 piadas</option>
           <option value="texto">Texto</option>
         </select>
-
       </div>
-
-
     </div>
 
     <div class="box__wrapper">

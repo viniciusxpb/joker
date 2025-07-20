@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   piada: string = '';
+  textoInput: string = '';
   categoriaSelecionada: string | null = null;
 
   ngOnInit() {
@@ -14,7 +15,9 @@ export class HomeComponent {
   }
 
   trocarCategoria() {
-    this.piada = '';
+    if (this.categoriaSelecionada !== 'texto') {
+      this.textoInput = '';
+    }
   }
 
   gerarPiada() {
