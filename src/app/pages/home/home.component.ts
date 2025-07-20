@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PiadaService } from '@services/piada.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,8 @@ export class HomeComponent {
   piada: string = '';
   textoInput: string = '';
   categoriaSelecionada: string | null = null;
+
+  constructor(private piadaService: PiadaService) {}
 
   ngOnInit() {
     this.categoriaSelecionada = '';
@@ -21,6 +24,23 @@ export class HomeComponent {
   }
 
   gerarPiada() {
+    if (this.categoriaSelecionada === 'texto' && this.textoInput.trim()) {
+      this.piadaService.buscarPiadaPorTexto(this.textoInput.trim())
+        .subscribe(piadas => {
+          this.piada = piadas.length > 0 ? piadas[0].texto : 'Nenhuma piada encontrada.';
+        });
+    } else if (this.categoriaSelecionada) {
+      this.piadaService.buscarPiadas(this.categoriaSelecionada)
+        .subscribe(piadas => {
+          this.piada = piadas.length > 0 ? piadas[0].texto : 'Nenhuma piada encontrada.';
+        });
+    } else {
+      this.piada = 'Selecione uma categoria para gerar piada.';
+    }
+  }
+
+
+  gerarPiadaMock() {
     const piadas: { [key: string]: string[] } = {
       aleatoria: [
         'Por que o JavaScript foi ao médico? Porque estava com muitos callbacks!',
