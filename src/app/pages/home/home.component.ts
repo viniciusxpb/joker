@@ -24,20 +24,25 @@ export class HomeComponent {
   }
 
   gerarPiada() {
-    if (this.categoriaSelecionada === 'texto' && this.textoInput.trim()) {
-      this.piadaService.buscarPiadaPorTexto(this.textoInput.trim())
-        .subscribe(piadas => {
-          this.piada = piadas.length > 0 ? piadas[0].texto : 'Nenhuma piada encontrada.';
-        });
-    } else if (this.categoriaSelecionada) {
-      this.piadaService.buscarPiadas(this.categoriaSelecionada)
-        .subscribe(piadas => {
-          this.piada = piadas.length > 0 ? piadas[0].texto : 'Nenhuma piada encontrada.';
-        });
-    } else {
-      this.piada = 'Selecione uma categoria para gerar piada.';
-    }
+  const topico = this.categoriaSelecionada === 'texto'
+    ? this.textoInput.trim()
+    : this.categoriaSelecionada;
+
+  if (!topico) {
+    this.piada = 'Selecione uma categoria ou digite um texto.';
+    return;
   }
+
+  this.piadaService.buscarPiada(topico).subscribe({
+    next: (res) => {
+      this.piada = res.piada || 'Nenhuma piada encontrada.';
+    },
+    error: () => {
+      this.piada = 'Erro ao buscar piada. Talvez o backend esteja rindo demais.';
+    }
+  });
+}
+
 
 
   gerarPiadaMock() {
