@@ -9,7 +9,7 @@ import { PiadaService } from '@services/piada.service';
 export class HomeComponent {
   piada: string = '';
   textoInput: string = '';
-  categoriaSelecionada: string | null = null;
+  categoriaSelecionada: string = '';
 
   constructor(private piadaService: PiadaService) {}
 
@@ -24,26 +24,24 @@ export class HomeComponent {
   }
 
   gerarPiada() {
-  const topico = this.categoriaSelecionada === 'texto'
-    ? this.textoInput.trim()
-    : this.categoriaSelecionada;
+    const topico = this.categoriaSelecionada === 'texto'
+      ? this.textoInput.trim()
+      : this.categoriaSelecionada;
 
-  if (!topico) {
-    this.piada = 'Selecione uma categoria ou digite um texto.';
-    return;
-  }
-
-  this.piadaService.buscarPiada(topico).subscribe({
-    next: (res) => {
-      this.piada = res.piada || 'Nenhuma piada encontrada.';
-    },
-    error: () => {
-      this.piada = 'Erro ao buscar piada. Talvez o backend esteja rindo demais.';
+    if (!topico) {
+      this.piada = 'Selecione uma categoria ou digite um texto.';
+      return;
     }
-  });
-}
 
-
+    this.piadaService.buscarPiada(topico).subscribe({
+      next: (res) => {
+        this.piada = res.piada || 'Nenhuma piada encontrada.';
+      },
+      error: () => {
+        this.piada = 'Erro ao buscar piada. Talvez o backend esteja rindo demais.';
+      }
+    });
+  }
 
   gerarPiadaMock() {
     const piadas: { [key: string]: string[] } = {
