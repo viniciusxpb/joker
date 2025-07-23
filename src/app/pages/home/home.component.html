@@ -6,9 +6,9 @@
       <div class="card__inputWrapper">
         <input
           class="card__textInput"
-          *ngIf="categoriaSelecionada === 'texto'"
+          *ngIf="categoriaSelecionada === 'tópico'"
           [(ngModel)]="textoInput"
-          placeholder="Digite o texto aqui"
+          placeholder="Digite o tópico aqui"
         />
 
         <select
@@ -18,8 +18,7 @@
         >
           <option value="" disabled hidden>Selecione uma categoria</option>
           <option value="aleatoria">Aleatória</option>
-          <option value="top10">Top 50 piadas</option>
-          <option value="texto">Texto</option>
+          <option value="tópico">Tópico</option>
         </select>
       </div>
     </div>
